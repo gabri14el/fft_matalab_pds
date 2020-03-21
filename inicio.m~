@@ -1,0 +1,9 @@
+t = 0:(1/500):2*pi
+x = sin(2*pi*60.*t) + sin(2*pi*200.*t);
+
+
+y = x(1:32)
+%plotagem para y = 
+Y = fft_dt(y, 500)
+Y = fft_df(y, 500)
+Y = tfd(y, 500);
