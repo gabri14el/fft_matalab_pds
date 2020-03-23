@@ -3,36 +3,48 @@
 %[gabri14el@gmail.com]
 
 function [y] = fft_df(x,t,fs)                                            
+%backup de x para plotagem
 x_bak = x;
+
+%tamanho de x
 N=size(x, 2);
 aux_ = 0:N-1;
 T = N/fs;
 frequency = aux_/T;
 j = sqrt(-1);
 
+%quantidade de niveis
 S=log2(N);                                                                  
 
 aux=N/2;                                                                   
 for estagio=1:S                                                              
     for index=0:(N/(2^(estagio-1))):(N-1)                                    
         for n=0:(aux-1)                                                  
-            pos=n+index+1;                                                  
-            pow=(2^(estagio-1))*n;                                           
+            %posicao atual
+            pos=n+index+1;
             
-            wn=exp(-j*(2*pi)*pow/N);                                      
-            a=x(pos)+x(pos+aux);                                           
-            b=(x(pos)-x(pos+aux)).*wn;                                      
-            x(pos)=a;                                                      
-            x(pos+aux)=b;                                                 
+            %calculo do wn
+            pow=(2^(estagio-1))*n;                                           
+            wn=exp(-j*(2*pi)*pow/N);   
+            
+            %buffers 
+            b1=x(pos)+x(pos+aux);                                           
+            b2=(x(pos)-x(pos+aux)).*wn;   
+            
+            %atualizacao do vetor
+            x(pos)=b1;                                                      
+            x(pos+aux)=b2;                                                 
         end
     end
+    %atualizacao da variavel auxiliar
 aux=aux/2;                                                                
 end
+%coloca a transformada na ordem certa
 y = bitrevorder(x);
 
 yn = y;
 
-
+%plotagem
 figure();
 subplot(311);
 stem(t, x_bak);

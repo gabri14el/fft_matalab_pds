@@ -26,11 +26,11 @@ for estagio=1:niveis
             pos = n+index+1;                                            
             wn=exp((-j)*(2*pi)*(2^(niveis-estagio))*n/N);                                      
             
-            a = x(pos)+x(pos+aux_).*wn;                                        
-            b = x(pos)-x(pos+aux_).*wn;                                        
+            b1 = x(pos)+x(pos+aux_).*wn;                                        
+            b2 = x(pos)-x(pos+aux_).*wn;                                        
             
-            x(pos) = a;                                                       
-            x(pos+ aux_) = b;                                                  
+            x(pos) = b1;                                                       
+            x(pos+ aux_) = b2;                                                  
         end
     end
 aux_=2*aux_;
