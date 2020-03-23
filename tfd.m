@@ -1,4 +1,5 @@
-function [y] = tfd(x, fs)
+function [y] = tfd(x,t,fs)
+x_bak = x;
 tamanho = size(x, 2);
 aux = 0:tamanho-1;
 T = tamanho/fs;
@@ -14,13 +15,24 @@ for k=0:tamanho-1
     end
 end
 
-yn = y/tamanho;
+yn = y;
+
 figure();
-subplot(211);
-plot(frequency, abs(yn));
-title('Expectro na Frequência');
-ylabel('|H(e^(jw))|');
+subplot(311);
+stem(t, x_bak);
+title('Sinal');
+ylabel('Amplitude');
+xlabel('Tempo');
+
+
+subplot(312);
+stem(frequency, abs(yn));
+title('Espectro na Frequência');
+ylabel('Módulo');
 xlabel('Frequência');
-subplot(212);
-plot(frequency, angle(yn));
+
+subplot(313);
+stem(frequency, angle(yn));
+ylabel('Fase');
+xlabel('Frequência');
 end

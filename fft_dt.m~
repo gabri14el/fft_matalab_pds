@@ -33,30 +33,25 @@ for estagio=1:niveis
             x(pos+ aux_) = b;                                                  
         end
     end
-aux_=2*aux_;
+aux_=2*aux_;                                                                
 end
 
 y=x;
 
-yn = y;
+yn = y;%/N;
+%fc = ceil(N/2);
 
 
 figure();
 subplot(311);
-stem(t, x_bak);
-title('Sinal');
-ylabel('Amplitude');
-xlabel('Tempo');
-
 
 subplot(312);
 stem(frequency, abs(yn));
-title('Espectro na Frequência');
-ylabel('Módulo');
+subplot(312);
+stem(frequency, abs(yn));
+title('Expectro na Frequência');
+ylabel('|H(e^(jw))|');
 xlabel('Frequência');
-
 subplot(313);
-stem(frequency, angle(yn));
-ylabel('Fase');
-xlabel('Frequência');
+s(frequency, angle(yn));
 end

@@ -2,8 +2,8 @@
 %modificado a ultima vez em 18/03/2020 por Gabriel Antonio Carneiro
 %[gabri14el@gmail.com]
 
-function [y] = fft_df(x,fs)                                            
-
+function [y] = fft_df(x,t,fs)                                            
+x_bak = x;
 N=size(x, 2);
 aux_ = 0:N-1;
 T = N/fs;
@@ -30,17 +30,25 @@ aux=aux/2;
 end
 y = bitrevorder(x);
 
-yn = y/N;
-%fc = ceil(N/2);
+yn = y;
 
 
 figure();
-subplot(211);
-plot(frequency, abs(yn));
-title('Expectro na Frequência');
-ylabel('|H(e^(jw))|');
+subplot(311);
+stem(t, x_bak);
+title('Sinal');
+ylabel('Amplitude');
+xlabel('Tempo');
 
-subplot(212);
-plot(frequency, angle(yn));
+
+subplot(312);
+stem(frequency, abs(yn));
+title('Espectro na Frequência');
+ylabel('Módulo');
+xlabel('Frequência');
+
+subplot(313);
+stem(frequency, angle(yn));
+ylabel('Fase');
 xlabel('Frequência');
 end
